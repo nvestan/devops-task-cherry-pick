@@ -1,13 +1,14 @@
 package main
 
 import (
-    "fmt"
-    "log"
-    "net/http"
+	"fmt"
+	"log"
+	"net/http"
 	"strconv"
 )
 
 func sendResponse(w http.ResponseWriter, r *http.Request) {
+
   keys, ok := r.URL.Query()["a"]
   if !ok || len(keys[0]) < 1 {
       log.Println("Url Param 'a' is missing")
@@ -32,14 +33,15 @@ func sendResponse(w http.ResponseWriter, r *http.Request) {
   }
 
   fmt.Fprintf(w, "%d + %d = %d", a, b, sum(a,b))
+
 }
 
 func main() {
-    http.HandleFunc("/", sendResponse)
-    log.Fatal(http.ListenAndServe(":7000", nil))
+	http.HandleFunc("/", sendResponse)
+	log.Fatal(http.ListenAndServe(":7000", nil))
 }
 
-func sum (a, b int) int {
-  t := b + a
-  return t
+func sumValues(a, b int) int {
+	t := b + a
+	return t
 }
